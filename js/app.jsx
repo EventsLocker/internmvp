@@ -90,7 +90,18 @@ var app = app || {};
 			var todos = this.props.model.todos;
 
 			var shownTodos = todos.filter(function (todo) {
-				return todo
+
+				// If Active is clicked, only non-checked todos should show
+				if (this.state.nowShowing == app.ACTIVE_TODOS) {
+					return !todo.completed;
+
+				// If Completed is clicked, only checked-off todos should show
+				} else if (this.state.nowShowing == app.COMPLETED_TODOS) {
+					return todo.completed;
+
+				} else {
+					return todo;
+				}
 			}, this);
 
 			var todoItems = shownTodos.map(function (todo) {
@@ -114,13 +125,16 @@ var app = app || {};
 
 			var completedCount = todos.length - activeTodoCount;
 
-			footer =
+			// Until there is at least one todo, hide footer
+			if (todos.length > 0) {	
+				footer =
 				<TodoFooter
-					count={activeTodoCount}
-					completedCount={completedCount}
-					nowShowing={this.state.nowShowing}
-					onClearCompleted={this.clearCompleted}
+				count={activeTodoCount}
+				completedCount={completedCount}
+				nowShowing={this.state.nowShowing}
+				onClearCompleted={this.clearCompleted}
 				/>;
+			}
 
 			if (todos.length) {
 				main = (

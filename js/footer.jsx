@@ -12,6 +12,10 @@ var app = app || {};
 		render: function () {
 			var clearButton = null;
 
+			// 'items' in the items left counter correctly reflects
+			// whether the number of active todos is plural or singular
+			var items = app.Utils.pluralize(this.props.count, 'item');
+
 			if (this.props.completedCount > 0) {
 				clearButton = (
 					<button
@@ -26,7 +30,7 @@ var app = app || {};
 			return (
 				<footer className="footer">
 					<span className="todo-count">
-						<strong>{this.props.count}</strong> items left
+						<strong>{this.props.count}</strong> {items} left
 					</span>
 					<ul className="filters">
 						<li>
