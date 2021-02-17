@@ -114,14 +114,6 @@ var app = app || {};
 
 			var completedCount = todos.length - activeTodoCount;
 
-			footer =
-				<TodoFooter
-					count={activeTodoCount}
-					completedCount={completedCount}
-					nowShowing={this.state.nowShowing}
-					onClearCompleted={this.clearCompleted}
-				/>;
-
 			if (todos.length) {
 				main = (
 					<section className="main">
@@ -140,6 +132,15 @@ var app = app || {};
 						</ul>
 					</section>
 				);
+				
+				//moved footer to only show if >1 item
+				footer =
+					<TodoFooter
+						count={activeTodoCount}
+						completedCount={completedCount}
+						nowShowing={this.state.nowShowing}
+						onClearCompleted={this.clearCompleted}
+					/>;
 			}
 
 			return (
