@@ -36,6 +36,7 @@ var app = app || {};
 		},
 
 		handleChange: function (event) {
+			
 			this.setState({newTodo: event.target.value});
 		},
 
@@ -83,6 +84,26 @@ var app = app || {};
 		clearCompleted: function () {
 			this.props.model.clearCompleted();
 		},
+		//helper fucntion for routing Active, completed and all todos
+		//parameteres : todoItems, the state of footer [all or active or completed]
+		getToDoItems: function(todoItems,reqState){
+			//console.log("req state",reqState)
+
+			if(reqState===app.ALL_TODOS) return todoItems;
+
+			if(reqState===app.ACTIVE_TODOS){
+				return todoItems.filter(todoItem=>{
+					//console.log(todoItem.props.todo)
+					return !todoItem.props.todo.completed;
+				});
+			}
+
+			if(reqState===app.COMPLETED_TODOS){
+				return todoItems.filter(todoItem=>{
+					return todoItem.props.todo.completed;	
+				});
+			}
+		},
 
 		render: function () {
 			var footer;
@@ -124,7 +145,7 @@ var app = app || {};
 
 			if (todos.length) {
 				main = (
-					<section className="main">
+					<section className="main" style={{background : "#FEF3C7"}}>
 						<input
 							id="toggle-all"
 							className="toggle-all"
@@ -136,17 +157,20 @@ var app = app || {};
 							htmlFor="toggle-all"
 						/>
 						<ul className="todo-list">
-							{todoItems}
+							{
+								this.getToDoItems(todoItems,this.state.nowShowing)
+							}
 						</ul>
 					</section>
 				);
 			}
 
+
 			return (
 				<div>
 					<header className="header">
 						<h1>todos</h1>
-						<input
+						<input style={{background : "#FEF3C7", WebkitTextFillColor: '#009DD6'}}
 							className="new-todo"
 							placeholder="What needs to be done?"
 							value={this.state.newTodo}
@@ -156,7 +180,7 @@ var app = app || {};
 						/>
 					</header>
 					{main}
-					{footer}
+					{todos.length>0?footer:<div></div>}
 				</div>
 			);
 		}

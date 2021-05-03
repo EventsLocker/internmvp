@@ -21,9 +21,13 @@ var app = app || {};
 				this.props.onDestroy();
 			}
 		},
+		/* handleMyEdit: function(){
+			console.log("handle my edit")
+		}, */
 
 		handleEdit: function () {
 			this.props.onEdit();
+			console.log('handleedit')
 			this.setState({editText: this.props.todo.title});
 		},
 
@@ -81,17 +85,19 @@ var app = app || {};
 					completed: this.props.todo.completed,
 					editing: this.props.editing
 				})}>
-					<div className="view">
+					<div className="view" onDoubleClick = {this.handleEdit}>
 						<input
 							className="toggle"
 							type="checkbox"
 							checked={this.props.todo.completed}
 							onChange={this.props.onToggle}
+							
+							
 						/>
 						<label>
 							{this.props.todo.title}
 						</label>
-						<button className="destroy" onClick={this.props.onDestroy} />
+						<button className="destroy" style={{color:'white', background:'grey',borderRadius:25}}onClick={this.props.onDestroy} />
 					</div>
 					<input
 						ref="editField"
@@ -100,6 +106,9 @@ var app = app || {};
 						onBlur={this.handleSubmit}
 						onChange={this.handleChange}
 						onKeyDown={this.handleKeyDown}
+						style={{background : "#FEF3C7"}}
+						
+						
 					/>
 				</li>
 			);

@@ -62,6 +62,7 @@ var app = app || {};
 
 	app.TodoModel.prototype.destroy = function (todo) {
 		this.todos = this.todos.filter(function (candidate) {
+			
 			return candidate !== todo;
 		});
 
@@ -78,6 +79,9 @@ var app = app || {};
 
 	app.TodoModel.prototype.clearCompleted = function () {
 		// Write this function
+		//console.log(this.todos)
+		//using Array.prototype.filter func to clear the completed to do's
+		this.todos = this.todos.filter(todo=> !todo.completed) //returns only ones that are not completed
 		this.inform();
 	};
 

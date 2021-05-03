@@ -21,12 +21,13 @@ var app = app || {};
 					</button>
 				);
 			}
-
+			
 			var nowShowing = this.props.nowShowing;
 			return (
-				<footer className="footer">
+				
+				<footer className="footer" style={{background : "#FEF3C7"}}>
 					<span className="todo-count">
-						<strong>{this.props.count}</strong> items left
+						<strong>{this.props.count}</strong> {this.props.count>1?'items left' : 'item left'}
 					</span>
 					<ul className="filters">
 						<li>
