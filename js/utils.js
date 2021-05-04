@@ -45,6 +45,25 @@ var app = app || {};
 				}
 			}
 			return newObj;
+		},
+
+		// Intern-Add: Rahul Gautham Putcha
+		// For JS-Problem-2
+		/*
+		 * Function: isTodo
+		 * Argument: todoItem
+		 * Details: 
+		 *  For a given todo-item, This function checks if the toggler has 
+		 *  the set `completed` key to true or false
+		 */
+		isTodo: function() {
+			/** for a given todo-item, This function checks if the toggler has 
+				the set `completed` key to true or false **/
+			if(arguments.length==1){
+				var obj = arguments[0];
+				return (obj.hasOwnProperty('completed'))?!obj['completed']:true;
+			}
+			return true;
 		}
 	};
 })();

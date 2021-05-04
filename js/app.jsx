@@ -89,9 +89,23 @@ var app = app || {};
 			var main;
 			var todos = this.props.model.todos;
 
-			var shownTodos = todos.filter(function (todo) {
-				return todo
-			}, this);
+			// Intern-Edit
+			// JS-Problem-3
+			// Details: Display according to the Route settings active,completed,all flag
+			var shownTodos;
+			if(this.state.nowShowing === app.ACTIVE_TODOS){
+				shownTodos= todos.filter(function (todo) {
+					return this.props.model.isActive(todo);
+				}, this);
+			}else if(this.state.nowShowing === app.COMPLETED_TODOS){
+				shownTodos= todos.filter(function (todo) {
+					return !this.props.model.isActive(todo);
+				}, this);
+			}else{
+				shownTodos= todos.filter(function (todo) {
+					return todo
+				}, this);
+			}
 
 			var todoItems = shownTodos.map(function (todo) {
 				return (

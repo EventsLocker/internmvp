@@ -76,11 +76,13 @@ var app = app || {};
 		},
 
 		render: function () {
+			// Intern-Edit: RahulGautham Putcha
+			// JS-Problem-1 | NOTE: Added onDoubleClick EventHandler
 			return (
 				<li className={classNames({
 					completed: this.props.todo.completed,
 					editing: this.props.editing
-				})}>
+				})} onDoubleClick={()=>{this.props.onEdit(this.props.todo)}}>
 					<div className="view">
 						<input
 							className="toggle"

@@ -72,13 +72,23 @@ var app = app || {};
 		this.todos = this.todos.map(function (todo) {
 			return todo !== todoToSave ? todo : Utils.extend({}, todo, {title: text});
 		});
-
 		this.inform();
 	};
 
+	// Intern-Add: Rahul Gautham Putcha
+	// JS-Problem-2
 	app.TodoModel.prototype.clearCompleted = function () {
-		// Write this function
+		this.todos = this.todos.filter((todo)=>Utils.isTodo(todo)); 
 		this.inform();
 	};
+
+	// Intern-Add: Rahul Gautham Putcha
+	// JS-Problem-3 & JS-Problem-4
+	/*
+	 * Function: isActive
+	 * Argument: todoItem
+	 * Details: return if an item is completed(false) or active(true)
+	 */
+	app.TodoModel.prototype.isActive = function (todo) {return Utils.isTodo(todo);};
 
 })();
