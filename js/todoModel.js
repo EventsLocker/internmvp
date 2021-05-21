@@ -77,7 +77,10 @@ var app = app || {};
 	};
 
 	app.TodoModel.prototype.clearCompleted = function () {
-		// Write this function
+		this.todos = this.todos.filter(function (todo) {
+            return !todo.completed;
+        })
+        
 		this.inform();
 	};
 

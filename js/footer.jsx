@@ -21,12 +21,18 @@ var app = app || {};
 					</button>
 				);
 			}
+            
+            if (this.props.count == 0) return (null);
+            
+            var itemPhrase = (this.props.count > 1) ? "items" : "item";
+
+
 
 			var nowShowing = this.props.nowShowing;
 			return (
 				<footer className="footer">
 					<span className="todo-count">
-						<strong>{this.props.count}</strong> items left
+						<strong>{this.props.count}</strong> {itemPhrase} left
 					</span>
 					<ul className="filters">
 						<li>
