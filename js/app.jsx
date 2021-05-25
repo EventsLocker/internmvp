@@ -90,7 +90,15 @@ var app = app || {};
 			var todos = this.props.model.todos;
 
 			var shownTodos = todos.filter(function (todo) {
-				return todo
+				if (this.state.nowShowing == app.ACTIVE_TODOS) {
+					return !todo.completed;
+				}
+				else if (this.state.nowShowing == app.COMPLETED_TODOS) {
+					return todo.completed;
+				}
+				else {
+					return todo;
+				}
 			}, this);
 
 			var todoItems = shownTodos.map(function (todo) {
@@ -114,13 +122,15 @@ var app = app || {};
 
 			var completedCount = todos.length - activeTodoCount;
 
-			footer =
-				<TodoFooter
-					count={activeTodoCount}
-					completedCount={completedCount}
-					nowShowing={this.state.nowShowing}
-					onClearCompleted={this.clearCompleted}
-				/>;
+			if (activeTodoCount || completedCount) {
+				footer =
+					<TodoFooter
+						count={activeTodoCount}
+						completedCount={completedCount}
+						nowShowing={this.state.nowShowing}
+						onClearCompleted={this.clearCompleted}
+					/>;
+			}
 
 			if (todos.length) {
 				main = (

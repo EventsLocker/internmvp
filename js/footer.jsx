@@ -10,6 +10,7 @@ var app = app || {};
 
 	app.TodoFooter = React.createClass({
 		render: function () {
+			const pluralize = (count, noun, suffix = 's') =>  `${noun}${count !== 1 ? suffix : ''}`;
 			var clearButton = null;
 
 			if (this.props.completedCount > 0) {
@@ -26,7 +27,7 @@ var app = app || {};
 			return (
 				<footer className="footer">
 					<span className="todo-count">
-						<strong>{this.props.count}</strong> items left
+						<strong>{this.props.count}</strong> {pluralize(this.props.count, 'item')} left
 					</span>
 					<ul className="filters">
 						<li>
